@@ -25,6 +25,7 @@ sub get_lines {
     my $text;
     {
         no warnings qw(once);
+        local $/ = undef;
         open(my $file, "<", $path)
             or croak "Can't find input file $path: $!";
         $text = <$file>;
@@ -76,7 +77,7 @@ sub match_regexes {
     my ($base_path, @regexes) = @_;
     my $match_path = $base_path;
     {
-        local $/ = "\\";
+        local $/ = $PATH_SEP;
         chomp $match_path;
     }
     for my $regex (@regexes) {
