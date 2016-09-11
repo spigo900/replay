@@ -44,6 +44,10 @@ CROAK
 
     ($playlist_file, $out_file, $base_path) = @ARGV;
 
+    if($base_path =~ /[^\Q$PATH_SEP\E]$/) {
+        $base_path = $base_path . $PATH_SEP;
+    }
+
     match_and_write($playlist_file, $out_file, $base_path);
     return 0;
 }
