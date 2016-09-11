@@ -28,9 +28,7 @@ sub match_and_write {
 
 # Main script routine.
 sub main {
-    my $playlist_file;
-    my $out_file;
-    my $base_path;
+    my ($playlist_file, $out_file, $base_path);
     my $ignore = 0;
     GetOptions("ignore|i" => \$ignore);
 
@@ -43,9 +41,8 @@ Wrong number of arguments! (Takes three: base path, playlist file, and output
 file.)
 CROAK
         unless $#ARGV == 2;
-    $playlist_file = $ARGV[0];
-    $out_file = $ARGV[1];
-    $base_path = $ARGV[2];
+
+    ($playlist_file, $out_file, $base_path) = @ARGV;
 
     match_and_write($playlist_file, $out_file, $base_path);
     return 0;
