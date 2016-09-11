@@ -15,7 +15,6 @@ my $g_die_on_errors = 0;
 sub match_and_write {
     my ($playlist_file, $out_file, $base_path) = @_;
     my $m3u = replay($playlist_file, $base_path);
-    print $m3u;
     if (defined $m3u && !(-e $out_file)) {
         no warnings qw(once);
         open(my $fh, ">", $out_file)
