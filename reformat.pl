@@ -30,8 +30,9 @@ sub get_lines {
 # Takes a file name and returns an array of array references, the first element
 # of which is the line and the second is the line number.
 sub get_lines_numbered {
-    # TODO: write this function.
-    ...
+    my ($path) = @_;
+    my @lines = get_lines($path);
+    return map { $_, $lines[$path] } 0..$#lines;
 }
 
 # Takes a single path regex string and returns an array of regexes.
