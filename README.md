@@ -3,7 +3,7 @@ Write a playlist using regular expressions for each song, then convert to .m3u
 form using this script (`reformat.pl`).
 
 The other script, `simple.pl`, takes a .m3u playlist you've already got and
-(de-)relativize it so you can use it in another music player or on another
+(de-)relativizes it so you can use it in another music player or on another
 platform (or both).
 
 ## Why?
