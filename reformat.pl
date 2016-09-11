@@ -38,12 +38,6 @@ sub get_lines_numbered {
 sub to_regexes {
     my ($line) = @_;
     return map { qr{$_} } split(qr{[^\\]/}, $line);
-    # for my $regex (split(qr{[^\\]/}, $line)) {
-    #     # my @line_regexes = map { qr{$_} } split(qr{[^\\]/}, $path);
-    #     my @line_regexes = split(qr{[^\\]/}, $path);
-    #     push @regexes, \@line_regexes;
-    # }
-    # return @regexes;
 }
 
 # Takes a directory path and a pattern and check if any children of the path
@@ -94,7 +88,6 @@ sub extract_regexes {
     my ($playlist_file) = @_;
     my @lines = get_lines($playlist_file);
     my @regexes = map { my @a = to_regexes($_); \@a } @lines;
-    # return @regexes;
 }
 
 # Takes an array of path regexes (as array references) and a base path and returns
@@ -102,7 +95,6 @@ sub extract_regexes {
 sub get_matches {
     my ($base_path, @regexes) = @_;
     my @matches = map { [$_, match_regexes($base_path, @{$_})] } @regexes;
-    # my @enumerated_matches = map [ $_, $matches[$_] ], 0 . $#matches;
     my $text = join ";", @matches;
 
     my @files = ();
@@ -124,11 +116,6 @@ sub get_matches {
         croak "Could not process playlist file";
     }
 
-    # my $out = undef;
-    # if (!@errors) {
-    #     $out = @files;
-    # }
-    # return $out;
     return @files;
 }
 
@@ -161,10 +148,6 @@ sub match_and_write {
     print $m3u;
     if (defined $m3u && !(-e $out_file)) {
         no warnings qw(once);
-        # open(FH, ">", $out_file)
-        #     or croak "Could not open output file $out_file: $!";
-        # print FH $m3u;
-        # close(FH);
         open(my $fh, ">", $out_file)
             or croak "Could not open output file $out_file: $!";
         $fh->print($m3u);
@@ -179,11 +162,6 @@ sub main {
     my $out_file;
     my $base_path;
     my $ignore = 0;
-    # GetOpt::Long::Configure("bundling");
-    # GetOptions("filename|f=s" => \$playlist_file,
-    #            "output|o=s" => \$out_file,
-    #            "basepath|b=s" => \$base_path,
-    #            "ignore|i" => \$ignore);
     GetOptions("ignore|i" => \$ignore);
 
     if (! $ignore) {
