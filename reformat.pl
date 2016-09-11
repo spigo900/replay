@@ -1,4 +1,4 @@
-# package Portaplay::reformat;
+# package Replay::reformat;
 
 use Config;
 use Getopt::Long qw(:config no_ignore_case bundling);
@@ -82,7 +82,7 @@ sub match_regexes {
     return $match_path;
 }
 
-# Takes the path to a Portaplay (working title) playlist file and parses it into
+# Takes the path to a Replay (working title) playlist file and parses it into
 # a list of regexes. Returns an array of path regexes (as array references).
 sub extract_regexes {
     my ($playlist_file) = @_;
@@ -125,23 +125,17 @@ sub construct_m3u {
     return (join "\n", @files) . "\n";
 }
 
-# Takes a Portaplay (again, working title!) playlist file and a base path and
+# Takes a Replay (working title!) playlist file and a base path and
 # returns the text for an .m3u file containing the filepaths that matched the
 # regexes from that playlist file.
 sub match_file {
     my ($playlist_file, $base_path) = @_;
     my @matches = get_matches($base_path, extract_regexes($playlist_file));
-    # my $out = undef;
-    # if (@matches) {
-    #     $out = construct_m3u(@matches);
-    # }
-    # return $out;
     return construct_m3u(@matches);
 }
 
-# Takes a Portaplay (again, working title!) playlist file and a base path and
-# returns the text for an .m3u file containing the filepaths that matched the
-# regexes from that playlist file.
+# Takes a Replay (again, working title!) playlist file and a base path and
+# writes the constructed .m3u file to the output file.
 sub match_and_write {
     my ($playlist_file, $out_file, $base_path) = @_;
     my $m3u = match_file($playlist_file, $base_path);
