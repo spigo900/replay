@@ -1,3 +1,4 @@
+#!/usr/bin/env perl
 # package Replay::reformat;
 
 use Getopt::Long qw(:config no_ignore_case bundling);

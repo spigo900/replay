@@ -1,3 +1,4 @@
+#!/usr/bn/env perl
 use Config;
 use Carp;
 use Getopt::Long;
