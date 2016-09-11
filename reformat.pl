@@ -1,6 +1,5 @@
 # package Replay::reformat;
 
-use Config;
 use Getopt::Long qw(:config no_ignore_case bundling);
 use Carp;
 use Replay::Format qw(replay);
@@ -8,7 +7,6 @@ use strict;
 use warnings;
 use feature 'say';
 
-my $PATH_SEP = $Config{osname} eq "MSWin32" ? q(\\) : "/";
 my $g_die_on_errors = 0;
 
 
@@ -37,7 +35,7 @@ sub main {
     GetOptions("ignore|i" => \$ignore);
 
     if (! $ignore) {
-        $g_die_on_errors = 1;
+        $Replay::Format::g_die_on_errors = 1;
     }
 
     croak <<'CROAK'

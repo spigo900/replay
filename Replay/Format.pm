@@ -1,10 +1,12 @@
 package Replay::Format;
 
+use Config;
+use Carp;
 use strict;
 use warnings;
 use feature 'say';
 use Exporter;
-# use vars qw($VERSION @ISA @EXPORT @EXPORT_OK %EXPORT_TAGS)
+use vars qw($VERSION @ISA @EXPORT @EXPORT_OK %EXPORT_TAGS);
 
 # NOTE: This module is in desperate need of cleanup. The internal function API
 # is horribly inconsistent. That said, it should run. Probably.
@@ -12,7 +14,10 @@ use Exporter;
 $VERSION = 0.10;
 @ISA = qw(Exporter);
 @EXPORT = ();
-@EXPORT_OK = (replay);
+@EXPORT_OK = qw(replay $g_die_on_errors);
+
+my $PATH_SEP = $Config{osname} eq "MSWin32" ? q(\\) : "/";
+our $g_die_on_errors = 0;
 
 # Takes a file name and returns an array of lines in the file.
 sub get_lines {
