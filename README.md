@@ -12,8 +12,13 @@ players. `simple.pl` is probably the more useful of the two for avoiding that
 extra work, but `reformat.pl` was more fun to write.
 
 ## Using
-`$ perl reformat.pl input_file.rpl output.m3u /base/path/`
-`$ perl simple.pl input_file.m3u output.m3u /base/path/`
+```shell
+$ perl reformat.pl input_file.rpl output.m3u /base/path/
+```
+
+```shell
+$ perl simple.pl input_file.m3u output.m3u /base/path/
+```
 
 ### As a library
 ```perl
