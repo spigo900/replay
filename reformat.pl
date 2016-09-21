@@ -9,6 +9,7 @@ use warnings;
 use feature 'say';
 
 my $g_die_on_errors = 0;
+my $PATH_SEP = $Replay::Format::PATH_SEP;
 
 
 # Takes a Replay (again, working title!) playlist file and a base path and
