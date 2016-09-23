@@ -1,6 +1,4 @@
 #!/usr/bin/env perl
-# package Replay::reformat;
-
 use Getopt::Long qw(:config no_ignore_case bundling);
 use Carp;
 use Replay::Format qw(replay);
@@ -9,7 +7,6 @@ use warnings;
 use feature 'say';
 
 my $g_die_on_errors = 0;
-my $PATH_SEP = $Replay::Format::PATH_SEP;
 
 
 # Takes a Replay (again, working title!) playlist file and a base path and
@@ -44,10 +41,6 @@ CROAK
         unless $#ARGV == 2;
 
     ($playlist_file, $out_file, $base_path) = @ARGV;
-
-    if($base_path =~ /[^\Q$PATH_SEP\E]$/) {
-        $base_path = $base_path . $PATH_SEP;
-    }
 
     match_and_write($playlist_file, $out_file, $base_path);
     return 0;

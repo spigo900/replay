@@ -1,6 +1,6 @@
 package Replay::Format;
 
-use Config;
+use File::Spec;
 use Carp;
 use strict;
 use warnings;
@@ -16,7 +16,6 @@ $VERSION = 0.10;
 @EXPORT = ();
 @EXPORT_OK = qw(replay $g_die_on_errors);
 
-my $PATH_SEP = $Config{osname} eq "MSWin32" ? q(\\) : "/";
 our $g_die_on_errors = 0;
 
 # Takes a file name and returns an array of lines in the file.
@@ -76,17 +75,13 @@ sub check_dir {
 sub match_regexes {
     my ($base_path, @regexes) = @_;
     my $match_path = $base_path;
-    {
-        local $/ = $PATH_SEP;
-        chomp $match_path;
-    }
     for my $regex (@regexes) {
         my $checked = check_dir($match_path, $regex);
         if (!defined $checked) {
             $match_path = undef;
             last
         }
-        $match_path = $match_path . $PATH_SEP . $checked;
+        $match_path = File::Spec->catfile($match_path, $checked);
     }
     return $match_path;
 }
